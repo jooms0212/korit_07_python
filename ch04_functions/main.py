@@ -164,3 +164,4 @@ def multiply2():
         print(f'{dan} x {i} = {i * dan}')
 
 multiply2()
+
