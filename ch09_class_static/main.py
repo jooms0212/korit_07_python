@@ -206,12 +206,19 @@ print(f'매출 : {Shop.get_total()}원')
 '''
 class Shop:
     total = 0
+    total2 = 0
     menu_list = [ { '떡볶이': 3000 }, { '순대': 4000 }, { '튀김': 500 }, { '김밥': 2000 } ]
+    menu_dict = {
+        '떡볶이': 3000,
+        '순대': 4000,
+        '튀김': 500,
+        '김밥': 2000,
+    }
 
     @classmethod
     def sales(cls, name, count):
         print(f'{name}을(를) {count}개 판매')
-        for menu in cls.menu_list:
+        for menu in cls.menu_list:      # 딕셔너리 내에 pair 하나 밖에 없는 상태인데, 있으면 이하의 코드라인이 실행되고 아니면 넘어갈 겁니다. 그러면 다음 반복으로 넘어가겠네요
             if name in menu:
                 cls.total += menu[name] * count
 
@@ -219,8 +226,22 @@ class Shop:
     def get_total(cls):
         return cls.total
 
+# menu_dict를 만들어서도 해보시오.
+    @classmethod
+    def sales2(cls, name, count):
+        print(f'{name}을(를) {count}개 판매')
+        if name in cls.menu_dict:       # 그러면 굳이 반복문 다 돌려서 일치하는 key가 있는지 확인할 필요가 없습니다.
+            cls.total2 += cls.menu_dict[name] * count
+
+    @classmethod
+    def get_total2(cls):
+        return cls.total2
+
 Shop.sales('떡볶이',1)
 Shop.sales('김밥',2)
 Shop.sales('튀김',5)
 
+Shop.sales2('순대', 3)
+
 print(f'매출 : {Shop.get_total()}원')
+print(f'매출 : {Shop.get_total2()}원')
